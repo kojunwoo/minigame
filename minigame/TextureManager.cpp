@@ -1,6 +1,7 @@
 #include"TextureManager.h"
 #include <SDL_image.h>
 
+
 TextureManager* TextureManager::s_pInstance = 0;
 
 bool TextureManager::load(std::string flieName, std::string id, SDL_Renderer* pRenderer)

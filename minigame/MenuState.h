@@ -26,4 +26,5 @@ private:
 
 	static void s_menuToPlay();
 	static void s_exitFromMenu();
+	static void s_image();
 };

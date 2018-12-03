@@ -40,7 +40,7 @@ void PlayState::render()
 bool PlayState::onEnter()
 {
 	if (!TheTextureManager::Instance()->load(
-		"assets/idle vein.png", "vein",
+		"assets/idle vayne.png", "vayne",
 		TheGame::Instance()->getRenderer()))
 	{
 		return false;
@@ -51,7 +51,7 @@ bool PlayState::onEnter()
 	}
 
 	GameObject* player = new Player(
-		new LoaderParams(290, 300, 52, 63, "vein"));
+		new LoaderParams(290, 300, 52, 63, "vayne"));
 	GameObject* enemy = new Enemy(
 		new LoaderParams(100, 100, 128, 55, "helicopter2"));
 	m_gameObjects.push_back(player);

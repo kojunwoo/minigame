@@ -6,7 +6,18 @@
 Ball::Ball(const LoaderParams* pParams) :
 	SDLGameObject(pParams)
 {
-	m_velocity.setX(-2);
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+	{
+		m_velocity.setX(4);
+	}
+	else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+	{
+		m_velocity.setX(-4);
+	}
+	else
+	{
+		m_velocity.setX(-4);
+	}
 }
 
 void Ball::draw()
@@ -25,7 +36,7 @@ void Ball::update()
 void Ball::collision(GameObject * pGameObject)
 {
 	//벽과 충돌시
-	if (((SDLGameObject*)pGameObject)->GetTextureID() == "animate5" || ((SDLGameObject*)pGameObject)->GetTextureID() == "animate6")
+	if (((SDLGameObject*)pGameObject)->GetTextureID() == "helicopter2")
 	{
 		//ball을 없엔다
 		std::vector<GameObject*>::iterator iter = TheGame::Instance()->GetGameObjects()->begin();

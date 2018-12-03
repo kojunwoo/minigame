@@ -35,34 +35,39 @@ void MenuState::s_exitFromMenu()
 	std::cout << "Exit button clicked\n";
 }
 
+void MenuState::s_image()
+{
+}
 
 bool MenuState::onEnter()
 {
-	
-	if (!TheTextureManager::Instance()->load("assets/pixel play.png",
+
+	if (!TheTextureManager::Instance()->load("assets/vayne play.png",
 		"playbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("assets/pixel exit.png",
+	if (!TheTextureManager::Instance()->load("assets/vayne exit.png",
 		"exitbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
 	
-	
 	GameObject* button1 = new MenuButton(
-		new LoaderParams(190, 210, 250, 100, "playbutton"),
+		new LoaderParams(190, 220, 250, 100, "playbutton"),
 		s_menuToPlay);
 
 	GameObject* button2 = new MenuButton(
-		new LoaderParams(190, 320, 250, 100, "exitbutton"),
+		new LoaderParams(190, 330, 250, 100, "exitbutton"),
 		s_exitFromMenu);
 
-	
+	GameObject* title = new MenuButton(
+		new LoaderParams(190, 100, 260, 70, "title"),
+		s_image);
 
 	m_gameObjects.push_back(button1);
 	m_gameObjects.push_back(button2);
+	m_gameObjects.push_back(title);
 
 	std::cout << "entering MenuState\n";
 	return true;
@@ -80,6 +85,8 @@ bool MenuState::onExit()
 		->clearFromTextureMap("playbutton");
 	TheTextureManager::Instance()
 		->clearFromTextureMap("exitbutton");
+	TheTextureManager::Instance()
+		->clearFromTextureMap("title");
 	std::cout << "exiting MenuState\n";
 	return true;
 }

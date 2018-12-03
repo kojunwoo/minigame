@@ -38,6 +38,7 @@ void Player::handleInput()
 	{
 		m_velocity.setX(-2);
 	}
+
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
 	{
 		m_velocity.setY(-2);
@@ -46,9 +47,21 @@ void Player::handleInput()
 	{
 		m_velocity.setY(2);
 	}
+
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
 	{
-			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() - 28, m_position.getY() + 18, 12, 5, "animate4")));
+		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+		{
+			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() + 54, m_position.getY() + 18, 12, 5, "animate4")));
+		}
+		else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+		{
+			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() - 14, m_position.getY() + 18, 12, 5, "animate4")));
+		}
+		else
+		{
+			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() - 14, m_position.getY() + 18, 12, 5, "animate4")));
+		}
 	}
 
 	//Vector2D* target = TheInputHandler::Instance()->getMousePosition();
