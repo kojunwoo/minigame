@@ -52,11 +52,6 @@ bool MenuState::onEnter()
 	{
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("assets/vayne.png",
-		"title", TheGame::Instance()->getRenderer()))
-	{
-		return false;
-	}
 	
 	GameObject* button1 = new MenuButton(
 		new LoaderParams(190, 220, 250, 100, "playbutton"),
@@ -66,14 +61,13 @@ bool MenuState::onEnter()
 		new LoaderParams(190, 330, 250, 100, "exitbutton"),
 		s_exitFromMenu);
 
-	GameObject* button3 = new MenuButton(
-		new LoaderParams(165, 70, 300, 110, "title"),
+	GameObject* title = new MenuButton(
+		new LoaderParams(190, 100, 260, 70, "title"),
 		s_image);
-
 
 	m_gameObjects.push_back(button1);
 	m_gameObjects.push_back(button2);
-	m_gameObjects.push_back(button3);
+	m_gameObjects.push_back(title);
 
 	std::cout << "entering MenuState\n";
 	return true;
