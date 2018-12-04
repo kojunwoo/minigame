@@ -41,7 +41,6 @@ bool GameOverState::onEnter()
 	if (!TheTextureManager::Instance()->load("assets/gameover.png",
 		"gameovertext", TheGame::Instance()->getRenderer()))
 	{
-		
 		return false;
 	}
 	if (!TheTextureManager::Instance()->load("assets/main.png",
@@ -50,7 +49,7 @@ bool GameOverState::onEnter()
 		return false;
 	}
 
-	if (!TheTextureManager::Instance()->load("assets/main.png",
+	if (!TheTextureManager::Instance()->load("assets/resume.png",
 		"restartbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;

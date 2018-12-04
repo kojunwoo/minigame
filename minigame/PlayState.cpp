@@ -4,6 +4,7 @@
 #include "InputHandler.h"
 #include "PauseState.h"
 #include "GameOverState.h"
+#include "AnimatedGraphic.h"
 
 const std::string PlayState::s_playID = "PLAY";
 PlayState* PlayState::s_pInstance = nullptr;
@@ -39,23 +40,36 @@ void PlayState::render()
 }
 bool PlayState::onEnter()
 {
+	
+
 	if (!TheTextureManager::Instance()->load(
 		"assets/idle vayne.png", "vayne",
 		TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("assets/helicopter2.png",
-		"helicopter2", TheGame::Instance()->getRenderer())) {
+	if (!TheTextureManager::Instance()->load("assets/eyemonster.png",
+		"monster", TheGame::Instance()->getRenderer()))
+	{
+		return false;
+	}
+	if (!TheTextureManager::Instance()->load(
+		"assets/map.png", "ground",
+		TheGame::Instance()->getRenderer()))
+	{
 		return false;
 	}
 
 	GameObject* player = new Player(
 		new LoaderParams(290, 300, 52, 63, "vayne"));
 	GameObject* enemy = new Enemy(
-		new LoaderParams(100, 100, 128, 55, "helicopter2"));
+		new LoaderParams(100, 100, 71, 46, "monster"));
+	GameObject* ground = new AnimatedGraphic(
+		new  LoaderParams(0, 0, 640, 480, "ground"), 1);
+
 	m_gameObjects.push_back(player);
 	m_gameObjects.push_back(enemy);
+	m_gameObjects.push_back(ground);
 
 	std::cout << "entering PlayState\n";
 	return true;
@@ -69,7 +83,7 @@ bool PlayState::onExit()
 	}
 	m_gameObjects.clear();
 
-	TheTextureManager::Instance()->clearFromTextureMap("helicopter");
+	TheTextureManager::Instance()->clearFromTextureMap("vayne");
 	std::cout << "exiting PlayState\n";
 	return true;
 }
