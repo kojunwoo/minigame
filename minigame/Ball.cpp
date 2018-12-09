@@ -31,12 +31,14 @@ void Ball::update()
 
 	m_currentFrame = int(((SDL_GetTicks() / 100) % 1));
 	SDLGameObject::update();
+
+
 }
 
 void Ball::collision(GameObject * pGameObject)
 {
 	//벽과 충돌시
-	if (((SDLGameObject*)pGameObject)->GetTextureID() == "helicopter2")
+	if (((SDLGameObject*)pGameObject)->GetTextureID() == "Monster")
 	{
 		//ball을 없엔다
 		std::vector<GameObject*>::iterator iter = TheGame::Instance()->GetGameObjects()->begin();

@@ -31,6 +31,9 @@ public:
 		return m_mousePosition;
 	}
 
+	bool ispush(SDL_Scancode key);
+	bool right;
+	bool left;
 private:
 	InputHandler();
 	~InputHandler() {}
@@ -39,6 +42,8 @@ private:
 	std::vector<bool> m_mouseButtonStates;
 	static InputHandler* s_pInstance;
 	const Uint8* m_keystates;
+	int push;
+
 };
 
 typedef InputHandler TheInputHandler;

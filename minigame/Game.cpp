@@ -30,7 +30,7 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 	//TheTextureManager::Instance()->load("assets/dog sprite.png", "animate2", m_pRenderer);
 	//TheTextureManager::Instance()->load("assets/eyemonster.png", "animate3", m_pRenderer);
 
-	SDL_SetRenderDrawColor(m_pRenderer, 60, 60, 80, 0);
+	SDL_SetRenderDrawColor(m_pRenderer, 40, 40, 50, 0);
 
 	//m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 43, 110, "animate2")));
 	//m_gameObjects.push_back(new Enemy(new LoaderParams(300, 300, 71, 46, "animate3")));

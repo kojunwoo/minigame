@@ -32,11 +32,15 @@ void Player::handleInput()
 {
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
 	{
-		m_velocity.setX(2);
+		TheInputHandler::Instance()->right = true;
+		
+		m_velocity.setX(1);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
 	{
-		m_velocity.setX(-2);
+		TheInputHandler::Instance()->right = false;
+
+		m_velocity.setX(-1);
 	}
 
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
@@ -48,21 +52,20 @@ void Player::handleInput()
 		m_velocity.setY(2);
 	}
 
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
-	{
-		if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+	
+	
+		if (isflip == true)
 		{
+			if(TheInputHandler::Instance()->ispush(SDL_SCANCODE_SPACE))
 			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() + 54, m_position.getY() + 18, 12, 5, "animate4")));
 		}
-		else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+		else if (isflip == false)
 		{
+			if (TheInputHandler::Instance()->ispush(SDL_SCANCODE_SPACE))
 			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() - 14, m_position.getY() + 18, 12, 5, "animate4")));
 		}
-		else
-		{
-			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() - 14, m_position.getY() + 18, 12, 5, "animate4")));
-		}
-	}
+		
+	
 
 	//Vector2D* target = TheInputHandler::Instance()->getMousePosition();
 	//m_velocity = *target - m_position;

@@ -95,3 +95,24 @@ bool InputHandler::getMouseButtonState(int buttonNumber)
 void InputHandler::reset()
 {
 }
+
+bool InputHandler::ispush(SDL_Scancode key)
+{
+	if (m_keystates != 0) {
+		if (m_keystates[key] == 1)
+		{
+			push++;
+
+			if (push == 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		push = 0;
+	}
+	return false;
+}
