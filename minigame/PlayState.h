@@ -1,6 +1,8 @@
 #pragma once
+
 #include "GameState.h"
 
+class Player;
 class SDLGameObject;
 
 class PlayState : public GameState
@@ -21,9 +23,11 @@ public:
 		}
 		return s_pInstance;
 	}
-
+	//std::vector<GameObject*> m_gameObjects; 
 private:
+	PlayState() {};
 	static const std::string s_playID;
 	static PlayState* s_pInstance;
-	std::vector<GameObject*> m_gameObjects;
+	
+	Player* m_pPlayer;
 };

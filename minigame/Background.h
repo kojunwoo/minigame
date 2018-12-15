@@ -10,7 +10,7 @@ public:
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
-
+	virtual void collision(GameObject* object) {};
 private:
 	void handleInput();
 };

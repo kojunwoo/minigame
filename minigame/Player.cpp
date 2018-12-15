@@ -2,6 +2,9 @@
 #include "InputHandler.h"
 #include "Game.h"
 #include "Ball.h"
+#include"PlayState.h"
+#include"GameObject.h"
+
 
 Player::Player(const LoaderParams* pParams) :
 	SDLGameObject(pParams)
@@ -20,7 +23,7 @@ void Player::update()
 
 	handleInput();
 
-	m_currentFrame = int(((SDL_GetTicks() / 100) % 5));
+ 	m_currentFrame = int(((SDL_GetTicks() / 100) % 5));
 	SDLGameObject::update();
 }
 
@@ -28,46 +31,38 @@ void Player::clean()
 {
 }
 
+void Player::collision(GameObject * object)
+{
+	if (((SDLGameObject*)object)->GetTextureID() == "monster")
+	{
+		isDie = true;
+	}
+}
+
 void Player::handleInput()
 {
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
-	{
-		TheInputHandler::Instance()->right = true;
-		
-		m_velocity.setX(1);
+	{	
+		m_velocity.setX(0.001);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
 	{
-		TheInputHandler::Instance()->right = false;
-
-		m_velocity.setX(-1);
+		m_velocity.setX(-0.001);
 	}
 
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
+	if (isflip == true)
 	{
-		m_velocity.setY(-2);
+		if (TheInputHandler::Instance()->ispush(SDL_SCANCODE_SPACE))
+		{
+			PlayState::Instance()->getGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() + 54, m_position.getY() + 18, 12, 5, "arrow"), true));
+		}
 	}
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
+	else if (isflip == false)
 	{
-		m_velocity.setY(2);
+		if (TheInputHandler::Instance()->ispush(SDL_SCANCODE_SPACE))
+		{
+ 			GameObject* ball = new Ball(new LoaderParams(m_position.getX() - 14, m_position.getY() + 18, 12, 5, "arrow"), false);
+     		PlayState::Instance()->getGameObjects()->push_back(ball);
+		}
 	}
-
-	
-	
-		if (isflip == true)
-		{
-			if(TheInputHandler::Instance()->ispush(SDL_SCANCODE_SPACE))
-			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() + 54, m_position.getY() + 18, 12, 5, "animate4")));
-		}
-		else if (isflip == false)
-		{
-			if (TheInputHandler::Instance()->ispush(SDL_SCANCODE_SPACE))
-			TheGame::Instance()->GetGameObjects()->push_back(new Ball(new LoaderParams(m_position.getX() - 14, m_position.getY() + 18, 12, 5, "animate4")));
-		}
-		
-	
-
-	//Vector2D* target = TheInputHandler::Instance()->getMousePosition();
-	//m_velocity = *target - m_position;
-	//m_velocity /= 50;
 }

@@ -16,7 +16,6 @@ public:
 	void update();
 	void handleEvents();
 	void clean();
-	void collision();
 	bool running() { return m_bRunning; }
 	void quit();
 

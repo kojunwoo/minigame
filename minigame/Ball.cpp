@@ -3,16 +3,12 @@
 #include "InputHandler.h"
 #include "Game.h"
 
-Ball::Ball(const LoaderParams* pParams) :
+Ball::Ball(const LoaderParams* pParams,bool right) :
 	SDLGameObject(pParams)
 {
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+	if (right)
 	{
 		m_velocity.setX(4);
-	}
-	else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
-	{
-		m_velocity.setX(-4);
 	}
 	else
 	{
@@ -37,21 +33,21 @@ void Ball::update()
 
 void Ball::collision(GameObject * pGameObject)
 {
-	//벽과 충돌시
-	if (((SDLGameObject*)pGameObject)->GetTextureID() == "Monster")
+	if (((SDLGameObject*)pGameObject)->GetTextureID() == "monster")
 	{
+		
+
 		//ball을 없엔다
-		std::vector<GameObject*>::iterator iter = TheGame::Instance()->GetGameObjects()->begin();
-		std::vector<GameObject*>::iterator iterEnd = TheGame::Instance()->GetGameObjects()->end();
+		std::vector<GameObject*>::iterator iter = PlayState::Instance()->getGameObjects()->begin();
+		std::vector<GameObject*>::iterator iterEnd = PlayState::Instance()->getGameObjects()->end();
 		for (; iter != iterEnd; iter++)
 		{
 			if (*iter == this)
 			{
-				TheGame::Instance()->GetGameObjects()->erase(iter);
+				PlayState::Instance()->getGameObjects()->erase(iter);
 				break;
 			}
 		}
-
 	}
 }
 

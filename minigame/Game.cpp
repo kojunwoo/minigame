@@ -2,16 +2,18 @@
 #include "InputHandler.h"
 #include "PlayState.h"
 #include "MenuState.h"
+#include "CollisionManager.h"
+#include <SDL_mixer.h>
 
 Game* Game::s_pInstance = 0;
 
 bool Game::init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0)
 	{
 
-
-		m_pWindow = SDL_CreateWindow("minigame",
+		m_pWindow = SDL_CreateWindow("VAYNE",
 
 			SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED,
@@ -25,18 +27,11 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 		m_bRunning = false;
 		return false;
 	}
-	TheTextureManager::Instance()->load("assets/arrow.png", "animate4", m_pRenderer);
-
-	//TheTextureManager::Instance()->load("assets/dog sprite.png", "animate2", m_pRenderer);
-	//TheTextureManager::Instance()->load("assets/eyemonster.png", "animate3", m_pRenderer);
-
 	SDL_SetRenderDrawColor(m_pRenderer, 40, 40, 50, 0);
-
-	//m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 43, 110, "animate2")));
-	//m_gameObjects.push_back(new Enemy(new LoaderParams(300, 300, 71, 46, "animate3")));
 
 	m_pGameStateMachine = new GameStateMachine();
 	m_pGameStateMachine->changeState(MenuState::Instance());
+
 
 
 	m_bRunning = true;
@@ -68,6 +63,8 @@ void Game::update() {
 	{
 		m_gameObjects[i]->update();
 	}
+	
+
 }
 
 void Game::clean()

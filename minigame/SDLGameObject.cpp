@@ -15,29 +15,21 @@ m_velocity(0.0f, 0.0f), m_acceleration(0.0f, 0.0f)
 
 void SDLGameObject::draw()
 {
-	if (TheInputHandler::Instance()->right == true)
+	if(isflip == true)
 	{
 		TextureManager::Instance()->drawFrame(m_textureID,
 			(Uint32)m_position.getX(), (Uint32)m_position.getY(),
 			m_width, m_height, m_currentRow, m_currentFrame,
 			TheGame::Instance()->getRenderer(),
 			SDL_FLIP_HORIZONTAL);
-		isflip = true;
-	}
-	else if(TheInputHandler::Instance()->right == false)
-	{
-		TextureManager::Instance()->drawFrame(m_textureID,
-			(Uint32)m_position.getX(), (Uint32)m_position.getY(),
-			m_width, m_height, m_currentRow, m_currentFrame,
-			TheGame::Instance()->getRenderer());
-		isflip = false;
-	}
-	else {
-		TextureManager::Instance()->drawFrame(m_textureID,
-			(Uint32)m_position.getX(), (Uint32)m_position.getY(),
-			m_width, m_height, m_currentRow, m_currentFrame,
-			TheGame::Instance()->getRenderer());
 		
+	}
+	else
+	{		
+		TextureManager::Instance()->drawFrame(m_textureID,
+			(Uint32)m_position.getX(), (Uint32)m_position.getY(),
+			m_width, m_height, m_currentRow, m_currentFrame,
+			TheGame::Instance()->getRenderer());		
 	}
 
 	/*
@@ -49,6 +41,15 @@ void SDLGameObject::draw()
 
 void SDLGameObject::update()
 {
+	if (m_velocity.getX() > 0)
+	{
+		isflip = true;
+	}
+	else if (m_velocity.getX() < 0)
+	{
+		isflip = false;
+	}
+
 	m_velocity += m_acceleration;
 	m_position += m_velocity;
 }

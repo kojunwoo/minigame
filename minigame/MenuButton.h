@@ -15,7 +15,7 @@ public:
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
-
+	virtual void collision(GameObject* object) {};
 	void(*m_callback)();
 	bool m_bReleased;
 

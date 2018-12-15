@@ -17,7 +17,7 @@ void GameOverState::s_gameOverToMain()
 void GameOverState::s_restartPlay()
 {
 	TheGame::Instance()->getStateMachine()->changeState(
-		new PlayState());
+		PlayState::Instance());
 }
 
 void GameOverState::update()
@@ -43,13 +43,13 @@ bool GameOverState::onEnter()
 	{
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("assets/main menu.png",
+	if (!TheTextureManager::Instance()->load("assets/main menu2.png",
 		"mainbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
 
-	if (!TheTextureManager::Instance()->load("assets/restart.png",
+	if (!TheTextureManager::Instance()->load("assets/restart2.png",
 		"restartbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;

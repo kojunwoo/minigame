@@ -11,7 +11,7 @@ public:
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
-
+	virtual void collision(GameObject* object) {};
 	std::string GetTextureID() {
 		return m_textureID;
 	}
@@ -19,7 +19,7 @@ public:
 	Vector2D& getPosition() { return m_position; }
 	int getWidth() { return m_width; }
 	int getHeight() { return m_height; }
-	bool isflip;
+	bool isflip = false;
 	friend class CollisionManager;
 protected:
 	int m_width;

@@ -6,7 +6,7 @@
 class Ball : public SDLGameObject
 {
 public:
-	Ball(const LoaderParams* pParams);
+	Ball(const LoaderParams* pParams, bool right);
 	virtual void draw();
 	virtual void update();
 	virtual void collision(GameObject* pGameObject);
@@ -14,4 +14,5 @@ public:
 
 private:
 	void handleInput();
+
 };

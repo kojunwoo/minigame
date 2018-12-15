@@ -37,11 +37,11 @@ void PauseState::render()
 
 bool PauseState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("assets/restart.png",
+	if (!TheTextureManager::Instance()->load("assets/restart2.png",
 		"resumebutton", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("assets/main menu.png",
+	if (!TheTextureManager::Instance()->load("assets/main menu2.png",
 		"mainbutton", TheGame::Instance()->getRenderer())) {
 		return false;
 	}

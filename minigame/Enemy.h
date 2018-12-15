@@ -10,7 +10,10 @@ public:
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
+	virtual void collision(GameObject* object);
 
 private:
+	bool checkCollision = false;
+	int hp = 3;
 	void handleInput();
 };
